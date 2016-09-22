@@ -1,0 +1,69 @@
+Food Waste db schema
+
+User
+----
+id
+team_id
+first_name
+last_name
+email
+password
+currency
+	US dollars
+	CA dollars
+	euro
+weight_scale
+	imperial
+	metric	
+datetime
+
+Team
+----
+id
+name
+city
+state
+datetime
+
+Challenges
+----
+id
+name
+description
+challenge_type
+	30 day
+	90 day
+	180 day
+datetime
+
+ChallengeToUsers
+----
+challenge_id
+type = personal/household
+user_id or null
+team_id or null
+
+Waste
+----
+id
+user_id
+type_id
+challenge_id
+name
+weight
+cost
+datetime
+
+WasteType
+----
+id
+name
+	Beverage
+	Condiment
+	Dairy
+	Fruit/Veg
+	Grain/Starch
+	Meat
+	Misc
+	Restaurant
+	Snack/Dessert
