@@ -9,6 +9,7 @@ use App\Models\Waste;
 use App\Http\Controllers\Controller;
 use Carbon;
 use DateTimeZone;
+use App\Routes;
 
 class UsersController extends Controller
 {
@@ -17,6 +18,11 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(){
+     if (\Auth::check() ){
+       $this->show(\Auth::user() );
+     }   
+    }
     //
     public function show(User $user)
     {

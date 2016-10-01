@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -52,7 +53,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'team_name' => 'required|max:75',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -66,11 +69,23 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+       $user=User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'team_name' => $data['team_name'],
             'email' => $data['email'],
             'timezone' => 'America/New_York',
             'password' => bcrypt($data['password']),
         ]);
+       $data['id']=$user->id;
+
+        Mail::send('emails.welcome', $data, function($message) use ($data)
+        {
+            $message->from('a@acdubs.com', "Starve Your Garbage");
+            $message->subject("Welcome!");
+            $message->to($data['email']);
+        });
+
+        return $user;
     }
 }
