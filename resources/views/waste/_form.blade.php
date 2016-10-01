@@ -21,6 +21,7 @@
 			<div class="col-md-6 form-group">
 				{!! Form::label('created_at', "Date/Time") !!}
 				{!! Form::text('created_at', null, ['id' => 'dtpicker', 'class' => 'datepicker form-control']) !!}
+				<p>Leave blank for current time</p>
 			</div>
 			<div class="form-group">
 				{!! Form::submit($submitButtonText, ['class' => 'small-btn btn-primary form-control']) !!}
