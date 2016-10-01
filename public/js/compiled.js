@@ -24978,16 +24978,16 @@ var _Graph2 = _interopRequireDefault(_Graph);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var colorArray = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)'];
+var colorArray = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)', 'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)', 'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)', 'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)'];
 exports.default = _Graph2.default.extend({
-    props: ['keys', 'values', 'gtype', 'height', 'width'],
+    props: ['keys', 'values', 'height', 'width'],
 
     ready: function ready() {
 
         this.render({
 
             labels: this.keys,
-            type: 'line',
+            type: 'bar',
             // We could also do labels of
             // ['Jeffrey', 'Taylor'], and
             // then use one dataset object.
@@ -25020,7 +25020,7 @@ var _chart2 = _interopRequireDefault(_chart);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _vue2.default.extend({
-    template: '\n        <div>\n            <canvas id="graph" gtype="{{{ gtype }}}" width="{{{ width }}}" height="{{{ height }}}" v-el:canvas></canvas>\n            \n        </div>\n    ',
+    template: '\n        <div>\n            <canvas id="graph" width="{{{ width }}}" height="{{{ height }}}" v-el:canvas></canvas>\n            \n        </div>\n    ',
 
     data: function data() {
         return {
@@ -25032,7 +25032,7 @@ exports.default = _vue2.default.extend({
 
     methods: {
         render: function render(data) {
-            console.log(data);
+            //console.log(data);
             var chart = new _chart2.default(this.$els.canvas.getContext('2d'), { type: data.type, data: data }); //.Bar(data);
             this.legend = chart.generateLegend();
         }
@@ -25054,7 +25054,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var colorArray = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)'];
 exports.default = _Graph2.default.extend({
-    props: ['keys', 'values', 'gtype', 'height', 'width'],
+    props: ['keys', 'values', 'height', 'width'],
 
     ready: function ready() {
 
@@ -25088,16 +25088,16 @@ var _Graph2 = _interopRequireDefault(_Graph);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var colorArray = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)'];
+var colorArray = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)', 'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)', 'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)', 'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, .5)', 'rgba(255, 159, 64, 0.4)', 'rgba(255, 59, 64, 0.4)', 'rgba(255, 159, 164, 0.4)', 'rgba(55, 59, 224, 0.7)'];
 exports.default = _Graph2.default.extend({
-    props: ['keys', 'values', 'gtype', 'height', 'width'],
+    props: ['keys', 'values', 'height', 'width'],
 
     ready: function ready() {
 
         this.render({
 
             labels: this.keys,
-            type: 'line',
+            type: 'bar',
             // We could also do labels of
             // ['Jeffrey', 'Taylor'], and
             // then use one dataset object.
@@ -25105,13 +25105,12 @@ exports.default = _Graph2.default.extend({
             datasets: [{
                 label: "Foodwaste by Weight in ounces",
                 showLabel: false,
-
                 fillColor: "rgb(20,220,220, .4)",
                 strokeColor: "rgba(220,20,220,0.8)",
                 highlightFill: "rgba(20,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data: this.values,
-                backgroundColor: colorArray.reverse()
+                backgroundColor: colorArray,
+                data: this.values
 
             }]
         });
@@ -25146,4 +25145,4 @@ new _vue2.default({
 
 },{"./components/CostGraph":47,"./components/PieGraph":49,"./components/WasteGraph":50,"vue":46}]},{},[51]);
 
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=compiled.js.map

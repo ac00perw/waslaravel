@@ -102,7 +102,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="/js/dateformat.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/compiled.js"></script>
     @yield('bottom-scripts')
   <script>
   $(function() {

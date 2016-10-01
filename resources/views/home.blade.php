@@ -14,9 +14,9 @@
                         You have not recorded any garbage yet
                     @else
                     <h4>Food waste in ounces</h4>
-                        <waste-graph :width="800" :height="300" :gtype="line" :keys="{{ $months }}" :values="{{ $weight }}"></waste-graph>
+                        <waste-graph :width="800" :height="300" :keys="{{ $months }}" :values="{{ $weight }}"></waste-graph>
                         <h4>Food cost in US dollars</h4>
-                        <cost-graph  :width="800" :height="300" :gtype="line" :keys="{{ $months }}" :values="{{ $cost }}" ></cost-graph>
+                        <cost-graph  :width="800" :height="300" :keys="{{ $months }}" :values="{{ $cost }}" ></cost-graph>
                     @endif
                     </div>
                     <div class="col-lg-4">
@@ -54,7 +54,7 @@
                         </ul>
                         @if (App\Models\Waste::wasteSum()['totalItems']>0)
                             <h4>Breakdown by type/ounce</h4>
-                            <pie-graph  :width="200" :height="200" :gtype="pie" :keys="{{ $types }}" :values="{{  $weights }}" ></pie-graph>
+                            <pie-graph  :width="200" :height="200" :keys="{{ $types }}" :values="{{  $weights }}" ></pie-graph>
                         @endif
                     </div>
                     <div class="col-lg-12">

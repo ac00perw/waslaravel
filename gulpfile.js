@@ -13,7 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
 	 mix.sass('app.scss')
-    .browserify('main.js', 'dateformat.js')
+    .browserify('main.js', 'public/js/compiled.js')
     .browserify('search-teams.js')
     .version('css/app.css');
 });

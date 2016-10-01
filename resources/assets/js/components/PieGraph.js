@@ -11,7 +11,7 @@ var colorArray=[
                 'rgba(55, 59, 224, 0.7)',
             ];
 export default Graph.extend({
-    props: ['keys', 'values', 'gtype', 'height', 'width'],
+    props: ['keys', 'values', 'height', 'width'],
 
     ready() {
 
