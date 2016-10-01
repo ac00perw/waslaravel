@@ -42,3 +42,19 @@ body {
 	height: 200px;
 	overflow: hidden
 }
+
+/******* errors *******/
+.e404{
+	display: flex;
+	display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.e404 h1{
+	color: white;
+	font-size: 6em;
+}

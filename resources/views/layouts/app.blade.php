@@ -15,6 +15,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+    @yield('top-scripts')
 
 </head>
 <body id="app-layout">

@@ -34,4 +34,18 @@ body {
   height: 200px;
   overflow: hidden; }
 
+/******* errors *******/
+.e404 {
+  display: flex;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.e404 h1 {
+  color: white;
+  font-size: 6em; }
+
 /*# sourceMappingURL=app.css.map */
