@@ -3,11 +3,9 @@
 @section('content')
 
 <div class="container">
-<h1>Editing {{ $user->first_name }}</h1>
-
 
 	{!! Form::model($user, ['method'=> 'patch', 'action' => ['UsersController@update', $user->id]  ]) !!}
-		@include('user._form', ['submitButtonText' => 'Update User'])
+		@include('user._form', ['submitButtonText' => 'Update Team'])
 	{!! Form::close() !!}
 
 	@if ($errors->any() )

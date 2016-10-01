@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Starve Your Garbage</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 
 </head>
@@ -31,7 +32,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Waste
+                    Starve Your Garbage
                 </a>
             </div>
 
@@ -41,15 +42,26 @@
                     
                     
                 @if (Auth::user() )
-                    <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                    <li><a href="{{ url('/home') }}">Your Dashboard</a></li>
+                     <!-- li class="dropdown">
+                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              Your Challenges <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a href="/challenges">Show</a></li>
+                              <li><a href="#">that</a></li>
+                              <li><a href="{{ url('/challenges/create') }}">Initiate a Challenge!</a></li>
+                            </ul>
+                        </li -->
+                    <li><a href="/challenges">Your Challenges</a></li>
                     <li><a href="{{ url('/waste/record') }}">Record Waste</a></li>
-                    <li><a href="{{ url('/waste/') }}">Statistics</a></li>
+                    <li><a href="{{ url('/waste/') }}">Site-wide Statistics</a></li>
 
-                    @if (Auth::user()->team_id == 1)
-                        <li><a href="{{ url('/team/new') }}">Start/Join Team</a></li>
-                    @else
-                        <li><a href="{{ url('/challenge/new') }}">Start Challenge</a></li>
-                    @endif
+                  {{--  @if (Auth::user()->team_id == 1) --}}
+                       
+                   {{--  @else --}}
+                        
+                    {{-- @endif --}}
                 @else
                     <li><a href="{{ url('/about') }}">About</a></li>
                 @endif
@@ -78,13 +90,35 @@
         </div>
     </nav>
     <div class="container">
+        @if (Session::has('message'))
+           <div class="alert alert-info">{{ Session::get('message') }}</div>
+        @endif
         @yield('content')
     </div>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script> -->
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="/js/dateformat.js"></script>
     <script src="/js/main.js"></script>
+    @yield('bottom-scripts')
+  <script>
+  $(function() {
+    
+    // df = new dateFormat();
+    //$( "#datepicker" ).datepicker();
+    if( $('.enddate').val() == ''){
+        $('.dateboxes').hide();
+    }
+    $( ".datepicker, .startdate, .enddate" ).datepicker({dateFormat: 'yy-mm-dd'});
+    $('.startdate, .length').change(function(){
+        var future = new Date( $('.startdate').val()+ " 01:00:00 EST");
+        var enddate=future.setTime(future.getTime() + $('.length').val() * 24 * 60 * 60 * 1000);
+        $('.dateboxes').show();
+        $('.enddate').val( dateFormat(enddate, "yyyy-mm-dd") );
+    });
+  });
+  </script>
 </body>
 </html>

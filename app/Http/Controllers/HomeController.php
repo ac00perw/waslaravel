@@ -27,9 +27,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // get waste from this year for logged in user;
+        print $request->session()->get('key');
+
         $waste = User::find( \Auth::user()->id )->getWasteByMonth();
         $list = User::find( \Auth::user()->id )->getLastEntries(10);
         $types= User::find( \Auth::user()->id )->getTypeList();

@@ -5,14 +5,19 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">At a Glance</div>
 
                 <div class="panel-body">
                     <div class="col-lg-8">
+                    
+                     @if (App\Models\Waste::wasteSum()['totalItems']==0)
+                        You have not recorded any garbage yet
+                    @else
                     <h4>Food waste in ounces</h4>
                         <waste-graph :width="800" :height="300" :gtype="line" :keys="{{ $months }}" :values="{{ $weight }}"></waste-graph>
                         <h4>Food cost in US dollars</h4>
                         <cost-graph  :width="800" :height="300" :gtype="line" :keys="{{ $months }}" :values="{{ $cost }}" ></cost-graph>
+                    @endif
                     </div>
                     <div class="col-lg-4">
                     <h4>Your Stats</h4>
@@ -47,9 +52,10 @@
                             <li><span class="key">Weight vs. average this month:</span></li>   
                             
                         </ul>
-                        <h4>Breakdown by type/ounce</h4>
-                    
-                    <pie-graph  :width="200" :height="200" :gtype="pie" :keys="{{ $types }}" :values="{{  $weights }}" ></pie-graph>
+                        @if (App\Models\Waste::wasteSum()['totalItems']>0)
+                            <h4>Breakdown by type/ounce</h4>
+                            <pie-graph  :width="200" :height="200" :gtype="pie" :keys="{{ $types }}" :values="{{  $weights }}" ></pie-graph>
+                        @endif
                     </div>
                     <div class="col-lg-12">
                         <h4>Last recorded items</h4>
@@ -61,16 +67,18 @@
                                 <th>Weight</th>
                                 <th>Cost</th>
                                 <th>Type</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($list as $l)
                                     <tr>
-                                        <td>{{ date('h:ia n/d/Y', strtotime($l->created_at) ) }}</td>
+                                        <td>{{ Helper::tz($l->created_at, "m/d/Y g:i a") }}</td>
                                         <td>{{ str_limit($l->description, $limit = 20, $end = '...') }}</td>
                                         <td>{{ $l->weight }} oz.</td>
-                                        <td>${{ $l->cost }}</td>
+                                        <td>{{ Helper::parseCost($l->cost) }}</td>
                                         <td>{{ App\Models\WasteType::find($l->waste_type_id)->name }}</td>
+                                        <td><a href="/waste/{{ $l->id }}/edit">[edit]</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

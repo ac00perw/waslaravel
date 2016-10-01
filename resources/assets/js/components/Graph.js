@@ -19,7 +19,7 @@ export default Vue.extend({
 
     methods: {
         render(data) {
-            console.log(data);
+            //console.log(data);
             const chart = new Chart(
                 this.$els.canvas.getContext('2d'),
                 {type: data.type, data: data }

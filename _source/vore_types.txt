@@ -1,0 +1,14 @@
+Omnivore
+Vegetarian
+Lacto Vegetarian
+Lacto-ovo Vegetarian
+Vegan
+Pescatarian
+Gluten-free
+Diabetic
+Buddhist
+Hindu
+Islam
+Kosher
+Other
+

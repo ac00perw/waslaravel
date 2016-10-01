@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Waste;
 use App\Models\User;
+use Carbon;
 use Auth;
 
 class WastesController extends Controller
@@ -52,7 +53,8 @@ class WastesController extends Controller
                 'weight'=>$request->weight,
                 'cost' => $request->cost,
                 'waste_type_id' => $request->waste_type_id,
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
+                
             ]);
             return redirect('/home');
         }else{
@@ -80,6 +82,8 @@ class WastesController extends Controller
     public function edit($id)
     {
         //
+        $waste = Waste::findOrFail($id);
+        return view('waste.edit', compact('waste') );
     }
 
     /**
@@ -92,6 +96,16 @@ class WastesController extends Controller
     public function update(Request $request, $id)
     {
         //
+         $waste = Waste::findOrFail($id);
+            $waste->update([
+                'food_type_id' => $request->food_type_id,
+                'weight' => $request->weight,
+                'description' => $request->description,
+                'cost' => $request->cost,
+                'created_at' => Carbon\Carbon::parse($request->created_at),
+                ]);
+
+        return redirect('/home');
     }
 
     /**

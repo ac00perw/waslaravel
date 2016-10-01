@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Record Food Scraps</h1>
 	{!! Form::open(['url'=> 'waste']) !!}
-		@include('waste._form', ['submitButtonText' => 'Add Waste'])
+		@include('waste._form', ['submitButtonText' => 'Add Waste', 'headerText' => 'Record new entry'])
 	{!! Form::close() !!}
 
 	@if ($errors->any() )

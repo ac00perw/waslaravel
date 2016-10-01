@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Waste;
 use App\Http\Controllers\Controller;
 use Carbon;
+use DateTimeZone;
 
 class UsersController extends Controller
 {
@@ -38,7 +39,9 @@ class UsersController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        return view('user.edit', compact('user') );
+        $timezonelist = \DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+
+        return view('user.edit', compact('user', 'timezonelist') );
     }
 
     public function update($id, Request $request)
@@ -46,18 +49,22 @@ class UsersController extends Controller
         //
             $user = User::findOrFail($id);
             $user->update([
-            	'last_name' => $request->last_name, 
+                'team_description' => $request->team_description, 
+            	'team_name' => $request->team_name, 
+                'first_name' => $request->first_name, 
+                'last_name' => $request->last_name, 
             	'city' => $request->city, 
             	'state' => $request->state, 
             	'birthdate' => $request->birthdate, 
             	'weight_scale' => $request->weight_scale, 
-            	'currency' => $request->currency,
-            	'updated_at' => Carbon\Carbon::now()
+            	'teammates' => $request->teammates,
+                'team_type' => $request->team_type,
+                'currency' => $request->currency,
+            	'updated_at' => Carbon\Carbon::now(),
+                'timezone' => $request->timezone
             	]);
 
-        return redirect()->back();
-    }
-
-	
+        return view('user.profile', compact('user') );
+    }	
 
 }

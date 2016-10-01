@@ -7,3 +7,4 @@ new Vue({
 	el: 'body',
 	components: { WasteGraph, CostGraph, PieGraph }
 });
+

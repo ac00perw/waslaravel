@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChallengesToUsers extends Migration
+class ChallengesUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,14 @@ class ChallengesToUsers extends Migration
      */
     public function up()
     {
-        Schema::create('challenges_to_users', function (Blueprint $table) {
-            $table->integer('challenge_id')->unsigned()->unique();
-            $table->integer('user_id')->unsigned();
+        Schema::create('challenges_users', function (Blueprint $table) {
+            $table->integer('challenge_id')->unsigned();
+            $table->integer('user_id')->unsigned();            
 
             $table->foreign('challenge_id')
                     ->references('id')
-                    ->on('challenges');
+                    ->on('challenges')
+                    ->onDelete('cascade');
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users');
@@ -33,6 +34,6 @@ class ChallengesToUsers extends Migration
     public function down()
     {
          Schema::disableForeignKeyConstraints();
-         Schema::drop('challenges_to_users');
+         Schema::drop('challenges_users');
     }
 }

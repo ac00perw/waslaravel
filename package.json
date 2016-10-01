@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.0.0",
     "chart.js": "^2.2.2",
-    "laravel-elixir": "^4.0.0"
+    "laravel-elixir": "^4.0.0",
+    "dateformat": "^1.0.12"
   }
 }

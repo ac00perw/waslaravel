@@ -14,7 +14,8 @@ class Waste extends Model
         'cost',
         'waste_type_id',
         'user_id',
-        'weight'
+        'weight',
+        'created_at'
     ];
     public $timestamps = true;
 

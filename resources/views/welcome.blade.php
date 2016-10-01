@@ -9,6 +9,14 @@
 
                 <div class="panel-body">
                     Your Application's Landing Page.
+                    <ul>
+                        <li>WasteLandr.com</li>
+                        <li>Disposable.com</li>
+                        <li>SlimYourWaste.com</li>
+                        <li>StarveYourGarbage.com</li>
+                        <li></li>
+                    </ul>
+
                 </div>
             </div>
         </div>

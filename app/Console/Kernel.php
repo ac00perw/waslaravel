@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
+        \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\StatusCommand::class,
     ];
 
     /**
@@ -24,7 +25,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('inspire')
+                  ->daily()
+                  ->sendOutputTo('/Users/a/Desktop/out.txt')
+                  ->emailOutputTo('a@acdubs.com');
+      $schedule->command('challenges:update')
+                  ->sendOutputTo(base_path() . '/storage/logs/status.log')
+                  ->emailOutputTo('a@acdubs.com')
+                  ->dailyAt('14:03')->timezone('America/New_York');
+        //$schedule->exec('touch /Users/a/Sites/waslaravel')
     }
 }

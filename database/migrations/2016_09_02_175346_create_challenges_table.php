@@ -16,7 +16,7 @@ class CreateChallengesTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->text('description');
-            $table->tinyInteger('challenge_type'); // # of days = 30 day 90 day 180 day
+            $table->integer('owner_id'); // # of days = 30 day 90 day 180 day
             $table->string('start_date', 10);
             $table->string('end_date', 10);
             $table->timestamps();

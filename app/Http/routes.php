@@ -21,6 +21,7 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,6 +36,8 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();     
+    Route::get('avatar', 'ImageController@resizeImage');
+    Route::post('resizeImagePost',['as'=>'resizeImagePost','uses'=>'ImageController@resizeImagePost']);
 
     Route::get('/', function () {
         return view('welcome');
@@ -42,12 +45,23 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
     Route::get('/about', 'PagesController@about');
-    Route::get('user/{user}/lastwaste/{total?}', 'UsersController@getLastEntries');
     Route::get('user/{user}', 'UsersController@show');
+    Route::get('user/{user}/lastwaste/{total?}', 'UsersController@getLastEntries');
     Route::resource('user', 'UsersController');
-    Route::get('waste/record', 'WastesController@create');
-    Route::resource('waste', 'WastesController');
 
+    //record waste as opposed to creating it
+    Route::get('waste/record', 'WastesController@create');
+    Route::resource('waste', 'WastesController', ['except' => ['create']]);
+
+    Route::get('challenges/search/', 'ChallengesController@getUserList');
+    Route::get('challenges/addToChallenge/{id}', 'ChallengesController@addTeamToChallenge');
+    Route::get('challenges/prepareChallenge/{user_id}', 'ChallengesController@prepareChallenge');
+    Route::get('challenges/send', 'ChallengesController@sendChallenge');
+    Route::resource('challenges', 'ChallengesController');
+
+
+    
+    
 });
 
 

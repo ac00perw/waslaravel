@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 // use Carbon\Carbon;
 
 class User extends Authenticatable
@@ -14,7 +15,24 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'birthdate', 'city', 'state', 'email', 'password', 'weight_scale', 'currency'
+        'team_name',
+        'team_description',
+        'first_name', 
+        'last_name', 
+        'birthdate', 
+        'city', 
+        'state', 
+        'zip', 
+        'email', 
+        'password', 
+        'weight_scale', 
+        'currency',
+        'teammates',
+        'team_type',
+        'timezone',
+        'avatar_path',
+        'last_ip',
+        'last_login'
     ];
     protected $casts = [
         'options' => 'array',
@@ -42,7 +60,7 @@ class User extends Authenticatable
 
     public function challenge()
     {
-        return $this->belongsTo(Challenge::class);
+        return $this->belongsToMany(Challenge::class, 'challenges_users');
     }
 
     public function waste()
@@ -64,10 +82,43 @@ class User extends Authenticatable
      return $sum;
     }
 
+        /**
+     * [getFirstNameAttribute description]
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public function getAvatarPathAttribute($value)
+    {
+        if(file_exists($value)){
+            return $value;
+        }else{
+            return '/avatars/trash.jpg';
+        }
+    }
+
+    public function scopeTeamType($query, $type='any')
+    {
+       
+        if($type !='any'){
+            return $query->having('team_type', '=', $type);    
+        }else{
+            return $query;
+        }
+        
+    }
+
+    public function scopeAvailableUsers($query, $challenge_id)
+    {
+        $ids = DB::table('challenges_users')->where('challenge_id', '=', $challenge_id)->pluck('user_id');
+        //dd($ids);
+        return $query->whereNotIn('id', $ids);
+    }
+
     public function getWasteByMonth()
     {
 
         $waste = Waste::thisYear()
+        ->where('user_id', \Auth::user()->id)
          ->selectRaw('DATE_FORMAT(created_at, "%m") as mo, DATE_FORMAT(created_at, "%M") as month, sum(weight) as totalMonthlyWeight, sum(cost) as totalMonthlyCost')
          ->groupBy('mo')
          ->orderBy('mo', 'asc')
@@ -87,7 +138,8 @@ class User extends Authenticatable
 
     public function getLastEntries($take = 20)    
     {
-        $waste = Waste::select(['description', 'waste_type_id', 'cost', 'weight', 'created_at'])
+        $waste = Waste::select(['id', 'description', 'waste_type_id', 'cost', 'weight', 'created_at'])
+            ->where('user_id', \Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->take($take)
             ->get();
@@ -96,6 +148,8 @@ class User extends Authenticatable
     }
 
     public function getTypeList(){
+        $ids=array();
+        $weights=array();
         $wastes=Waste::where('user_id', '=', \Auth::user()->id)
             ->selectRaw('waste_type_id, sum(weight) as weight')
             ->groupBy('waste_type_id')
