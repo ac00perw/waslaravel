@@ -39,12 +39,12 @@ class HomeController extends Controller
         // get waste from this year for logged in user;
         
         
-        $waste = User::find( $user->id )->getWasteByMonth();
-        $list = User::find( $user->id )->getLastEntries(10);
-        $types= User::find( $user->id )->getTypeList();
+        $waste = $user->getWasteByMonth();
+        $list = $user->getLastEntries(10);
+        $types= $user->getTypeList();
         $wasteSum = Waste::wasteSum($user->id);
 
-        
+
         
         return view('home', array('weight' => json_encode($waste['weight']), 
             'cost' => json_encode($waste['cost']), 

@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <div class="col-lg-8">
                     
-                     @if (App\Models\Waste::wasteSum()['totalItems']==0)
+                     @if ($wasteSum['totalItems']==0)
                         You have not recorded any garbage yet
                     @else
                     <h4>Food waste in ounces</h4>

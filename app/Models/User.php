@@ -68,11 +68,6 @@ class User extends Authenticatable
         return $this->hasMany(Waste::class); 
     }
 
-    public function getID()
-    {
-        return Auth::user()->getId();
-    }
-
     static function getTotalCost()
     {
          $user = User::find(1);
@@ -114,11 +109,16 @@ class User extends Authenticatable
         return $query->whereNotIn('id', $ids);
     }
 
+    public function scopeUserOrAuth($query, $user)
+    {
+        return $query->where('id', $user);
+    }
+
     public function getWasteByMonth()
     {
 
         $waste = Waste::thisYear()
-        //->where('user_id', \Auth::user()->id)
+         ->where('user_id', $this->id)
          ->selectRaw('DATE_FORMAT(created_at, "%V") as mo, DATE_FORMAT(created_at, "%M") as month, sum(weight) as totalMonthlyWeight, sum(cost) as totalMonthlyCost')
          ->groupBy('mo')
          ->orderBy('mo', 'asc')
@@ -138,8 +138,9 @@ class User extends Authenticatable
 
     public function getLastEntries($take = 20)    
     {
+
         $waste = Waste::select(['id', 'description', 'waste_type_id', 'cost', 'weight', 'created_at'])
-            ->where('user_id', \Auth::user()->id)
+            ->where('user_id', '=', $this->id)
             ->orderBy('created_at', 'desc')
             ->take($take)
             ->get();
@@ -150,8 +151,8 @@ class User extends Authenticatable
     public function getTypeList(){
         $ids=array();
         $weights=array();
-        $wastes=Waste::where('user_id', '=', \Auth::user()->id)
-            ->selectRaw('waste_type_id, sum(weight) as weight')
+        $wastes=Waste::selectRaw('waste_type_id, sum(weight) as weight')
+            ->where('user_id', $this->id)
             ->groupBy('waste_type_id')
             ->pluck('weight', 'waste_type_id');
             $w=Array();
