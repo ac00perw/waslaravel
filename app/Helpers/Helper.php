@@ -35,7 +35,7 @@ class Helper
             ->inRandomOrder()
             ->first();
 
-            return sprintf("<blockquote>%s<br />- %s</blockquote>", $quote->quote, $quote->author);
+            return sprintf('<div class="quote">%s<br /><div class="author">- %s</div></div>', $quote->quote, $quote->author);
     }
 
 

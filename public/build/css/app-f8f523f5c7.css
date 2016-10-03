@@ -5736,8 +5736,28 @@ button.close {
 
 /* navbar */
 .navbar-default {
-  background-color: #D8D8D8;
-  border-color: #848BC7; }
+  background-color: #10559C;
+  border-color: #0B2750; }
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+  color: white; }
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover {
+  color: yellow; }
+
+/* welcome */
+.quote {
+  font-size: 1.4em;
+  font-weight: bold;
+  border-left: none;
+  width: 80%;
+  margin: 0 auto;
+  font-style: italic;
+  color: #666; }
+
+.author {
+  text-align: right;
+  font-weight: normal; }
 
 body {
   font-family: 'Lato', sans-serif;

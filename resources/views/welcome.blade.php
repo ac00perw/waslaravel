@@ -8,16 +8,13 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                <h1>{!! \App\Helpers\Helper::getRandomQuote() !!} </h1>
-                <h1>Starve Your Garbage is the working title</h1>
+                {!! \App\Helpers\Helper::getRandomQuote() !!}
                     <ul>
                         <li>WasteLandr.com</li>
                         <li>Disposable.com</li>
                         <li>SlimYourWaste.com</li>
                         <li>StarveYourGarbage.com</li>
-                        
                     </ul>
-
                 </div>
             </div>
         </div>
