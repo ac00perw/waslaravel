@@ -5734,7 +5734,21 @@ button.close {
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
   border-top: none; }
 
+select:active, select:hover {
+  outline: none; }
+
+input, .form-control {
+  border: 1px solid #eeeeee; }
+
+input:focus, .form-control:focus {
+  border: 1px solid #cccccc;
+  box-shadow: none;
+  background-color: #FFFDCC; }
+
 /* navbar */
+.fa {
+  padding-right: 5px; }
+
 .navbar-default {
   background-color: #0D3268;
   border-color: #0B2750; }
@@ -5785,7 +5799,7 @@ body {
   padding: 10px; }
 
 .panel-heading {
-  font-weight: bold; }
+  font-size: 1.3em; }
 
 .avatar {
   width: 200px;

@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-4 panel panel-defau">
+	<div class="col-sm-4">
 	<div class="panel panel-default">
 		<div class="panel-heading">Details</div>
 			<div class="form-group">

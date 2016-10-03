@@ -43,7 +43,8 @@
                     
                     
                 @if (Auth::user() )
-                    <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                    <li><a href="{{ url('/home') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>
+Dashboard</a></li>
                      <!-- li class="dropdown">
                          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                               Your Challenges <span class="caret"></span>
@@ -54,9 +55,11 @@
                               <li><a href="{{ url('/challenges/create') }}">Initiate a Challenge!</a></li>
                             </ul>
                         </li -->
-                    <li><a href="/challenges">Challenges</a></li>
-                    <li><a href="{{ url('/waste/record') }}">Record Waste</a></li>
-                    <li><a href="{{ url('/waste/') }}">Site-wide Statistics</a></li>
+                        <li><a href="/challenges"><i class="fa fa-user-plus" aria-hidden="true"></i>Challenges</a></li>
+                    <li><a href="{{ url('/waste/record') }}"><i class="fa fa-apple" aria-hidden="true"></i>
+Record Waste</a></li>
+                    <li><a href="{{ url('/waste/') }}"><i class="fa fa-info-circle" aria-hidden="true"></i>
+Site-wide Statistics</a></li>
 
                   {{--  @if (Auth::user()->team_id == 1) --}}
                        
@@ -109,7 +112,15 @@
     @yield('bottom-scripts')
   <script>
   $(function() {
-    
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-850650-21', 'auto');
+  ga('send', 'pageview');
+
     // df = new dateFormat();
     //$( "#datepicker" ).datepicker();
     if( $('.enddate').val() == ''){

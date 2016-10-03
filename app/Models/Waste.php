@@ -39,8 +39,7 @@ class Waste extends Model
          ->groupBy('user_id')
          ->get();
 
-        
-        $out=Array('totalItems' => 0, 'totalCost'=>0, 'totalWeight' =>0);
+        $out=Array('totalItems' => 0, 'totalCost'=>0, 'totalWeight' =>0, 'days' => Carbon::parse(\Auth::user()->created_at)->diffInDays(Carbon::now()) );
         foreach ($wastes as $w){
             $out['totalItems']=$w->totalItems;
             $out['totalCost']=$w->totalCost;
