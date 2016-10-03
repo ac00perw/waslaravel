@@ -5,6 +5,7 @@ namespace App\Helpers;
 use Auth;
 use Carbon;
 use Log;
+use DB;
 
 class Helper
 {
@@ -27,6 +28,14 @@ class Helper
     public static function parseCost($amount){
 
     	return sprintf("$ %s", $amount);
+    }
+
+    public static function getRandomQuote(){
+        $quote = DB::table('quotes')
+            ->inRandomOrder()
+            ->first();
+
+            return sprintf("<blockquote>%s<br />- %s</blockquote>", $quote->quote, $quote->author);
     }
 
 

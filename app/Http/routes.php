@@ -40,7 +40,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('resizeImagePost',['as'=>'resizeImagePost','uses'=>'ImageController@resizeImagePost']);
 
     Route::get('/', function () {
-        return view('welcome');
+        return view('welcome', ['QuotesController@getRandomQuote']);
     });
 
     Route::get('/home', 'HomeController@index');

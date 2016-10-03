@@ -3,10 +3,11 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">Stats at a Glance</div>
-    
+    <h1>Coming Soon.</h1>
     <table class="table waste-list">
         <thead>
             <tr>
+                <th>Team</th>
                 <th>Date</th>
                 <th>Description</th>
                 <th>Weight</th>
@@ -16,7 +17,8 @@
         </thead>
         <tbody>
             @foreach ($list as $l)
-                <tr>
+                <tr class="@if ($l->user->id == \Auth::user()->id )active @endif">
+                    <td>{{ $l->user->team_name }}</td>
                     <td>{{ Helper::tz($l->created_at, "m/d/Y g:ia") }}</td>
                     <td>{{ str_limit($l->description, $limit = 20, $end = '...') }}</td>
                     <td>{{ $l->weight }} oz.</td>

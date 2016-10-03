@@ -43,7 +43,7 @@
                     
                     
                 @if (Auth::user() )
-                    <li><a href="{{ url('/home') }}">Your Dashboard</a></li>
+                    <li><a href="{{ url('/home') }}">Dashboard</a></li>
                      <!-- li class="dropdown">
                          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                               Your Challenges <span class="caret"></span>
@@ -54,7 +54,7 @@
                               <li><a href="{{ url('/challenges/create') }}">Initiate a Challenge!</a></li>
                             </ul>
                         </li -->
-                    <li><a href="/challenges">Your Challenges</a></li>
+                    <li><a href="/challenges">Challenges</a></li>
                     <li><a href="{{ url('/waste/record') }}">Record Waste</a></li>
                     <li><a href="{{ url('/waste/') }}">Site-wide Statistics</a></li>
 
@@ -91,10 +91,13 @@
         </div>
     </nav>
     <div class="container">
-        @if (Session::has('message'))
-           <div class="alert alert-info">{{ Session::get('message') }}</div>
+
+        @if (Session::has('msg'))
+           <div class="alert alert-info">{{ Session::get('msg') }}</div>
         @endif
+        
         @yield('content')
+        
     </div>
 
     <!-- JavaScripts -->

@@ -41,7 +41,8 @@ class HomeController extends Controller
             'months' => json_encode($waste['months']), 
             'list' => $list,  
             'types' => json_encode($types['ids']), 
-            'weights' => json_encode($types['weights'])  
+            'weights' => json_encode($types['weights']),
+            'user' => \Auth::user()
             ) );
     }
 }

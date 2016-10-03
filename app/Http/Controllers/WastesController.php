@@ -9,6 +9,7 @@ use App\Models\Waste;
 use App\Models\User;
 use Carbon;
 use Auth;
+use Redirect;
 
 class WastesController extends Controller
 {
@@ -48,7 +49,7 @@ class WastesController extends Controller
     {
         
         if (Auth::check()) {
-            Waste::create([
+            $waste = Waste::create([
                 'description'=>$request->description, 
                 'weight'=>$request->weight,
                 'cost' => $request->cost,
@@ -56,7 +57,9 @@ class WastesController extends Controller
                 'user_id' => Auth::user()->id,
                 
             ]);
-            return redirect('/home');
+            
+
+            return Redirect::back()->with('msg', 'The Message');
         }else{
             return redirect('/');
         }

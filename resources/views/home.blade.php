@@ -20,8 +20,9 @@
                     @endif
                     </div>
                     <div class="col-lg-4">
-                    <h4>Your Stats</h4>
+                    <h4>{{ $user->team_name }}'s Stats</h4>
                         <ul class="circle">
+                        <li><span class="key">Total Teammates:</span>{{ $user->teammates }}</li>
                             <li>
                                 <span class="key">Total Items: <span class="has-tip" title="Total number of wasted items"></span></span>
                                 {{ App\Models\Waste::wasteSum()['totalItems'] }}

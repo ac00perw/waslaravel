@@ -69,7 +69,7 @@ class UsersController extends Controller
             	'updated_at' => Carbon\Carbon::now(),
                 'timezone' => $request->timezone
             	]);
-
+        $request->session()->flash('msg', 'Profile update successful.');
         return view('user.profile', compact('user') );
     }	
 

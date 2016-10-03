@@ -8,13 +8,14 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    Your Application's Landing Page.
+                <h1>{!! \App\Helpers\Helper::getRandomQuote() !!} </h1>
+                <h1>Starve Your Garbage is the working title</h1>
                     <ul>
                         <li>WasteLandr.com</li>
                         <li>Disposable.com</li>
                         <li>SlimYourWaste.com</li>
                         <li>StarveYourGarbage.com</li>
-                        <li></li>
+                        
                     </ul>
 
                 </div>

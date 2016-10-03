@@ -23,7 +23,8 @@
 				{!! Form::text('created_at', null, ['id' => 'dtpicker', 'class' => 'datepicker form-control']) !!}
 				<p>Leave blank for current time</p>
 			</div>
-			<div class="form-group">
+
+			<div class=" form-group">
 				{!! Form::submit($submitButtonText, ['class' => 'small-btn btn-primary form-control']) !!}
 			</div>
 	</div>
