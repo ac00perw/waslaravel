@@ -100,8 +100,8 @@ class WastesController extends Controller
     {
         //
          $waste = Waste::findOrFail($id);
-        //nt working
-         //if($waste->user_id == \Auth::user()->id || \Auth::user()->is_admin == 1){
+
+         if($waste->user_id == \Auth::user()->id || \Auth::user()->is_admin == 1){
             $waste->update([
                 'food_type_id' => $request->food_type_id,
                 'weight' => $request->weight,
@@ -110,10 +110,10 @@ class WastesController extends Controller
                 'created_at' => Carbon\Carbon::parse($request->created_at),
                 ]);
 
-           return redirect('/home');
-       // }else{
-           //  return redirect('home')->with('msg', 'You are not allowed to edit other people\'s entries!');
-       // }
+            return redirect('/home');
+        }else{
+             return redirect('home')->with('msg', 'You are not allowed to edit other people\'s entries!');
+        }
     }
 
     /**
