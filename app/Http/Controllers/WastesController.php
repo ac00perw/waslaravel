@@ -101,7 +101,7 @@ class WastesController extends Controller
         //
          $waste = Waste::findOrFail($id);
 
-         if($waste->user_id == \Auth::user()->id || \Auth::user()->is_admin == 1){
+         if($id == \Auth::user()->id || \Auth::user()->is_admin == 1){
             $waste->update([
                 'food_type_id' => $request->food_type_id,
                 'weight' => $request->weight,
