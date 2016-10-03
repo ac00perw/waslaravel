@@ -5,19 +5,21 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
+            
                 <div class="panel-heading"> <h4>{{ $user->team_name }}'s Stats</h4></div>
 
                 <div class="panel-body">
+                @if ($wasteSum['totalItems']==0)
+                    You have not recorded any garbage yet
+                @else
                     <div class="col-lg-8">
                     
-                     @if ($wasteSum['totalItems']==0)
-                        You have not recorded any garbage yet
-                    @else
+                     
                     <h4>Food waste in ounces</h4>
                         <waste-graph type="line" :width="800" :height="300" :keys="{{ $months }}" :values="{{ $weight }}"></waste-graph>
                         <h4>Food cost in US dollars</h4>
                         <cost-graph type="bar" :width="800" :height="300" :keys="{{ $months }}" :values="{{ $cost }}" ></cost-graph>
-                    @endif
+                    
                     </div>
                     <div class="col-lg-4">
                    
@@ -100,8 +102,10 @@
                             </tbody>
                         </table>
                     </div>
+                    @endif
                 </div>
             </div>
+            
         </div>
     </div>
 @endsection
