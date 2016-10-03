@@ -59,7 +59,7 @@ class WastesController extends Controller
             ]);
             
 
-            return Redirect::back()->with('msg', 'The Message');
+            return Redirect::back()->with('msg', 'Success.');
         }else{
             return redirect('/');
         }
