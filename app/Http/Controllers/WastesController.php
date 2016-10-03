@@ -110,7 +110,7 @@ class WastesController extends Controller
                 'created_at' => Carbon\Carbon::parse($request->created_at),
                 ]);
 
-           // return redirect('/home');
+           return redirect('/home');
        // }else{
            //  return redirect('home')->with('msg', 'You are not allowed to edit other people\'s entries!');
        // }
