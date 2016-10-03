@@ -33,13 +33,19 @@ class Waste extends Model
 		return $query->where('created_at', '>=', Carbon::NOW()->firstOfYear() );
     }
 
-    static function wasteSum(){
-        $wastes=Waste::where('user_id', '=', \Auth::user()->id)
+    static function wasteSum($id=null){
+
+        if (!$id){
+            $user=User::find( \Auth::user()->id);
+        }else{
+            $user=User::find($id);
+        }
+        $wastes=Waste::where('user_id', '=', $user->id)
          ->selectRaw('count(id) as totalItems, SUM(cost) as totalCost, SUM(weight) as totalWeight ')
          ->groupBy('user_id')
          ->get();
 
-        $out=Array('totalItems' => 0, 'totalCost'=>0, 'totalWeight' =>0, 'days' => Carbon::parse(\Auth::user()->created_at)->diffInDays(Carbon::now()) );
+        $out=Array('totalItems' => 0, 'totalCost'=>0, 'totalWeight' =>0, 'days' => Carbon::parse($user->created_at)->diffInDays(Carbon::now()) );
         foreach ($wastes as $w){
             $out['totalItems']=$w->totalItems;
             $out['totalCost']=$w->totalCost;

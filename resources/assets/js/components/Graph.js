@@ -4,7 +4,7 @@ import Chart from 'chart.js';
 export default Vue.extend({
     template: `
         <div>
-            <canvas id="graph" width="{{{ width }}}" height="{{{ height }}}" v-el:canvas></canvas>
+            <canvas width="{{{ width }}}" height="{{{ height }}}" v-el:canvas></canvas>
             
         </div>
     `,
@@ -22,9 +22,9 @@ export default Vue.extend({
             //console.log(data);
             const chart = new Chart(
                 this.$els.canvas.getContext('2d'),
-                {type: data.type, data: data }
+                {type: data.type, data: data, options: {legend: {display: data.displayLegend}} }
             );//.Bar(data);
-            this.legend = chart.generateLegend();
+          
         }
     }
 });

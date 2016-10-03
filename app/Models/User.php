@@ -118,7 +118,7 @@ class User extends Authenticatable
     {
 
         $waste = Waste::thisYear()
-        ->where('user_id', \Auth::user()->id)
+        //->where('user_id', \Auth::user()->id)
          ->selectRaw('DATE_FORMAT(created_at, "%V") as mo, DATE_FORMAT(created_at, "%M") as month, sum(weight) as totalMonthlyWeight, sum(cost) as totalMonthlyCost')
          ->groupBy('mo')
          ->orderBy('mo', 'asc')

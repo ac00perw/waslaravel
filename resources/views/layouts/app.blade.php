@@ -56,7 +56,7 @@ Dashboard</a></li>
                             </ul>
                         </li -->
                         <li><a href="/challenges"><i class="fa fa-user-plus" aria-hidden="true"></i>Challenges</a></li>
-                    <li><a href="{{ url('/waste/record') }}"><i class="fa fa-apple" aria-hidden="true"></i>
+                    <li><a href="{{ url('/waste/record') }}"><i class="fa fa-trash" aria-hidden="true"></i>
 Record Waste</a></li>
                     <li><a href="{{ url('/waste/') }}"><i class="fa fa-info-circle" aria-hidden="true"></i>
 Site-wide Statistics</a></li>

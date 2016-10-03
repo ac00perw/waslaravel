@@ -43,7 +43,7 @@ Route::group(['middleware' => 'web'], function () {
         return view('welcome', ['QuotesController@getRandomQuote']);
     });
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('/home/{user?}', 'HomeController@index');
     Route::get('about', 'PagesController@about');
     Route::get('user/{user}', 'UsersController@show');
     Route::get('user/{user}/lastwaste/{total?}', 'UsersController@getLastEntries');

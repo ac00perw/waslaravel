@@ -5731,9 +5731,6 @@ button.close {
     display: none !important; } }
 
 /* resets */
-.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-  border-top: none; }
-
 select:active, select:hover {
   outline: none; }
 
@@ -5745,6 +5742,9 @@ input:focus, .form-control:focus {
   box-shadow: none;
   background-color: #FFFDCC; }
 
+table thead tr, table thead td {
+  border: none !important; }
+
 /* navbar */
 .fa {
   padding-right: 5px; }
@@ -5752,9 +5752,8 @@ input:focus, .form-control:focus {
 .navbar-default {
   background-color: #0D3268;
   border-color: #0B2750; }
-
-.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
-  color: white; }
+  .navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+    color: white; }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover {
   color: yellow; }

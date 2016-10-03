@@ -27,14 +27,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($id=null)
     {
+        
+        if(!$id){
+            $user=\Auth::user();
+        }else{
+            $user=User::where('id', $id)->first();
+        }
+        
         // get waste from this year for logged in user;
-        print $request->session()->get('key');
+        
+        
+        $waste = User::find( $user->id )->getWasteByMonth();
+        $list = User::find( $user->id )->getLastEntries(10);
+        $types= User::find( $user->id )->getTypeList();
+        $wasteSum = Waste::wasteSum($user->id);
 
-        $waste = User::find( \Auth::user()->id )->getWasteByMonth();
-        $list = User::find( \Auth::user()->id )->getLastEntries(10);
-        $types= User::find( \Auth::user()->id )->getTypeList();
+        
         
         return view('home', array('weight' => json_encode($waste['weight']), 
             'cost' => json_encode($waste['cost']), 
@@ -42,7 +52,8 @@ class HomeController extends Controller
             'list' => $list,  
             'types' => json_encode($types['ids']), 
             'weights' => json_encode($types['weights']),
-            'user' => \Auth::user()
+            'user' => $user,
+            'wasteSum' => $wasteSum,
             ) );
     }
 }

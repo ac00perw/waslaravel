@@ -11,14 +11,15 @@ var colorArray=[
                 'rgba(55, 59, 224, 0.7)',
             ];
 export default Graph.extend({
-    props: ['keys', 'values', 'height', 'width'],
+    props: ['keys', 'values', 'height', 'width', 'id', 'type'],
 
     ready() {
 
         this.render({
 
            labels: this.keys,
-            type: 'pie',
+            type: this.type,
+            displayLegend: true,
             // We could also do labels of
             // ['Jeffrey', 'Taylor'], and
             // then use one dataset object.
