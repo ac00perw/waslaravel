@@ -48,7 +48,7 @@ class Waste extends Model
         $out=Array('totalItems' => 0, 'totalCost'=>0, 'totalWeight' =>0, 'days' => Carbon::parse($user->created_at)->diffInDays(Carbon::now()) );
         foreach ($wastes as $w){
             $out['totalItems']=$w->totalItems;
-            $out['totalCost']=($w->totalCost ? 0 : $w->totalCost);
+            $out['totalCost']=(!$w->totalCost ? 0 : $w->totalCost);
             $out['totalWeight']=$w->totalWeight;
             $out['days']=($out['days']==0) ? 1 : $out['days'];
         }
