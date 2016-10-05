@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\User;
 use App\Models\Challenge;
+use App\Models\Waste;
 use App\Helpers\Helper;
 use Carbon;
 use Auth;
@@ -160,6 +161,25 @@ public function availableItems()
 
 		return view('challenge.index', compact('list') );
 	}
+
+    /**
+     * grab json stats based on id
+     * @param  Challenge $id [description]
+     * @return 
+     */
+    public function stats($id){
+        //get challenge
+        $challenge=Challenge::findOrFail($id);//->challengeRange($id);
+        $users=$challenge->users;
+        $waste = array();
+
+        foreach($users as $u){
+             $waste[$u->id]=Waste::ChallengeRange($challenge, $u->id)->Sums()->first();
+        }
+
+        //dd($users);
+        return $waste;
+    }
     
      /**
      * Store a newly created challenge

@@ -53,6 +53,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('waste/record', 'WastesController@create');
     Route::resource('waste', 'WastesController', ['except' => ['create']]);
 
+    Route::get('/challenge/{id}/stats', 'ChallengesController@stats');
     Route::get('challenges/search/', 'ChallengesController@getUserList');
     Route::get('challenges/addToChallenge/{id}', 'ChallengesController@addTeamToChallenge');
     Route::get('challenges/prepareChallenge/{user_id}', 'ChallengesController@prepareChallenge');

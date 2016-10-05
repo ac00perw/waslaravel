@@ -18,7 +18,8 @@
         <tbody>
             @foreach ($list as $l)
                 <tr class="@if ($l->user->id == \Auth::user()->id )active @endif">
-                    <td><a href="/home/{{ $l->user->id }}">{{ $l->user->team_name }}</a></td>
+                    <td><a href="/home/{{ $l->user->id }}">
+                    <img class="small-avatar" src="{{ $l->user->avatar_path }}" />&nbsp;{{ $l->user->team_name }}</a></td>
                     <td>{{ Helper::tz($l->created_at, "m/d/Y g:ia") }}</td>
                     <td>{{ str_limit($l->description, $limit = 20, $end = '...') }}</td>
                     <td>{{ $l->weight }} oz.</td>

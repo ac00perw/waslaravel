@@ -50,13 +50,14 @@ export default Graph.extend({
 
             datasets: [
                 {
-                    label: "",
+                    
                     showLabel: false,
                     showLegend: false,
                     fillColor: "rgb(20,220,220, .4)",
                     strokeColor: "rgba(220,20,220,0.8)",
                     highlightFill: "rgba(20,220,220,0.75)",
                     highlightStroke: "rgba(220,220,220,1)",
+
                     backgroundColor: colorArray,
                     data: this.values,
                     

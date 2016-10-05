@@ -14,19 +14,22 @@ class Helper
         return strtoupper($string);
     }
 
-    public static function tz(Carbon\Carbon $date, $format = "m/d/Y g:i a", $timezone='America/New_York')
+    public static function tz(Carbon\Carbon $date, $format = "m/d/Y g:i a", $timezone='America/New_York', $human = false)
     {
 		if (Auth::check() ){
             $timezone = Auth::user()->timezone;     
-            Log::info('Using user timezone: '.Auth::user()->timezone);       
+            // Log::info('Using user timezone: '.Auth::user()->timezone);       
 
         }
 
-        return $date->setTimezone($timezone)->format($format);
+        if($human){
+            return $date->setTimezone($timezone)->diffForHumans();
+        }else{
+            return $date->setTimezone($timezone)->format($format);
+        }
     }
 
     public static function parseCost($amount){
-
     	return sprintf("$ %s", $amount);
     }
 

@@ -23,8 +23,8 @@ class Challenge extends Model
     	return $this->belongsToMany(User::class, 'challenges_users');
     }
 
-    public function getSlug(
-        ){
+    public function getSlug()
+    {
         return str_slug($this->id.'-'.$this->name, '-');
     }
 }

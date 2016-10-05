@@ -56,10 +56,8 @@ Dashboard</a></li>
                             </ul>
                         </li -->
                         <li><a href="/challenges"><i class="fa fa-user-plus" aria-hidden="true"></i>Challenges</a></li>
-                    <li><a href="{{ url('/waste/record') }}"><i class="fa fa-trash" aria-hidden="true"></i>
-Record Waste</a></li>
-                    <li><a href="{{ url('/waste/') }}"><i class="fa fa-info-circle" aria-hidden="true"></i>
-Site-wide Statistics</a></li>
+                    <li><a href="{{ url('/waste/record') }}"><i class="fa fa-trash" aria-hidden="true"></i>Record Waste</a></li>
+                    <li><a href="{{ url('/waste/') }}"><i class="fa fa-info-circle" aria-hidden="true"></i>Site-wide Statistics</a></li>
 
                   {{--  @if (Auth::user()->team_id == 1) --}}
                        
@@ -80,7 +78,7 @@ Site-wide Statistics</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                              <img src="{{ Gravatar::src(Auth::user()->email, 25) }}">  {{ Auth::user()->team_name }} <span class="caret"></span>
+                              {{ Auth::user()->team_name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">

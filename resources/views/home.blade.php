@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
             
-                <div class="panel-heading"> <h4>{{ $user->team_name }}'s Stats</h4></div>
+                <div class="panel-heading"><h4><img class="small-avatar avatar" src="{{ $user->avatar_path }}" alt="" /> {{ $user->team_name }}'s Stats</h4></div>
 
                 <div class="panel-body">
                 @if ($wasteSum['totalItems']==0)
@@ -70,7 +70,7 @@
                     </table>
                        
                         <!-- p>$1560 per family of four per year https://www.nrdc.org/sites/default/files/wasted-food-IP.pdf</p -->
-                        @if (App\Models\Waste::wasteSum()['totalItems']>0)
+                        @if ($wasteSum['totalItems']>0)
                             <h4>Breakdown by type/ounce</h4>
                             <pie-graph type="pie"  :width="200" :height="200" :keys="{{ $types }}" :values="{{  $weights }}" ></pie-graph>
                         @endif
@@ -91,7 +91,7 @@
                             <tbody>
                                 @foreach ($list as $l)
                                     <tr>
-                                        <td>{{ Helper::tz($l->created_at, "m/d/Y g:i a") }}</td>
+                                        <td>{{ Helper::tz($l->created_at, "m/d/Y g:i a", $l->timezone, true) }}</td>
                                         <td>{{ str_limit($l->description, $limit = 20, $end = '...') }}</td>
                                         <td>{{ $l->weight }} oz.</td>
                                         <td>{{ Helper::parseCost($l->cost) }}</td>

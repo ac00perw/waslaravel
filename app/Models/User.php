@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Gravatar;
 // use Carbon\Carbon;
 
 class User extends Authenticatable
@@ -85,9 +86,10 @@ class User extends Authenticatable
     public function getAvatarPathAttribute($value)
     {
         if(file_exists($value)){
-            return $value;
+            return "/".$value;
         }else{
-            return '/avatars/trash.jpg';
+            return Gravatar::src($this->email) ;
+            //return '/avatars/trash.jpg';
         }
     }
 
@@ -98,8 +100,7 @@ class User extends Authenticatable
             return $query->having('team_type', '=', $type);    
         }else{
             return $query;
-        }
-        
+        }  
     }
 
     public function scopeAvailableUsers($query, $challenge_id)
@@ -117,9 +118,8 @@ class User extends Authenticatable
     public function getWasteByMonth()
     {
 
-        $waste = Waste::thisYear()
-         ->where('user_id', $this->id)
-         ->selectRaw('DATE_FORMAT(created_at, "%V") as mo, DATE_FORMAT(created_at, "%M") as month, sum(weight) as totalMonthlyWeight, sum(cost) as totalMonthlyCost')
+        $waste = Waste::where('user_id', $this->id)
+         ->selectRaw('DATE_FORMAT(created_at, "%m") as mo, DATE_FORMAT(created_at, "%M") as month, sum(weight) as totalMonthlyWeight, sum(cost) as totalMonthlyCost')
          ->groupBy('mo')
          ->orderBy('mo', 'asc')
          //->pluck('totalMonthlyCost', 'totalMonthlyWeight', 'mo')

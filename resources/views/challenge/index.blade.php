@@ -14,6 +14,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Dates</th>
+            <th>Days left</th>
             <th></th>
         </tr>
     </thead>
@@ -22,10 +23,13 @@
             <tr class="running{{ App\Http\Controllers\ChallengesController::contestIsRunning($l->id) }}">
                 <!-- <td>{{ Helper::tz($l->created_at) }}</td> -->
                 <td>{{ $l->name }} </td>
-                <td>{{ str_limit($l->description, $limit = 20, $end = '...') }}</td>
-                
-                <td>{{ Helper::tz(\Carbon\Carbon::parse($l->start_date), 'm/d/Y') }} - {{ Helper::tz(\Carbon\Carbon::parse($l->end_date), 'm/d/Y') }}
-                    ( {{ Carbon\Carbon::parse($l->end_date)->diffInDays(Carbon\Carbon::parse($l->start_date)) }} days )
+                <td>
+                    {{ str_limit($l->description, $limit = 20, $end = '...') }}</td>
+                <td>
+                    {{ Helper::tz(\Carbon\Carbon::parse($l->start_date), 'm/d/Y') }} - {{ Helper::tz(\Carbon\Carbon::parse($l->end_date)->endOfDay(), 'm/d/Y') }}
+                </td>
+                <td>
+                    {{ Carbon\Carbon::now('UTC')->diffInDays(Carbon\Carbon::parse($l->end_date)->endOfDay() ) }} days remaining
                 </td>
                 <td>
                 @if ($l->status == 'created')
@@ -39,9 +43,9 @@
             </tr>
             <tr class="running{{ App\Http\Controllers\ChallengesController::contestIsRunning($l->id) }}">
                 <td>Teams:</td>
-                <td colspan=3>
+                <td colspan=4>
                     @foreach ($l->users as $u)
-                        <button><img class="avatar" src="{{ $u->avatar_path }}" alt=""><br />{{ $u->team_name }}</button>
+                    <div class="col-md-4"><a href="/home/{{ $u->id }}"><img class="avatar" src="{{ $u->avatar_path }}" alt=""><br />{{ $u->team_name }}</a></div>
                     @endforeach
                     @if (count($l->users) < 3)
                     <a href="/challenges/addToChallenge/{{ $l->getSlug() }}">Add team</a>

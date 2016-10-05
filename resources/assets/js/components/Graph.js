@@ -22,7 +22,7 @@ export default Vue.extend({
             //console.log(data);
             const chart = new Chart(
                 this.$els.canvas.getContext('2d'),
-                {type: data.type, data: data, options: {legend: {display: data.displayLegend}} }
+                {type: data.type, data: data, options: {legend: {display: data.displayLegend},  } } 
             );//.Bar(data);
           
         }

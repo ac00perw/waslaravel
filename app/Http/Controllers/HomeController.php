@@ -43,8 +43,6 @@ class HomeController extends Controller
         $list = $user->getLastEntries(10);
         $types= $user->getTypeList();
         $wasteSum = Waste::wasteSum($user->id);
-
-
         
         return view('home', array('weight' => json_encode($waste['weight']), 
             'cost' => json_encode($waste['cost']), 
