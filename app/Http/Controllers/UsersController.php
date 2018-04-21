@@ -67,7 +67,8 @@ class UsersController extends Controller
                 'team_type' => $request->team_type,
                 'currency' => $request->currency,
             	'updated_at' => Carbon\Carbon::now(),
-                'timezone' => $request->timezone
+                'timezone' => $request->timezone,
+                'avg_food_cost' => $request->avg_food_cost
             	]);
         $request->session()->flash('msg', 'Profile update successful.');
         return view('user.profile', compact('user') );

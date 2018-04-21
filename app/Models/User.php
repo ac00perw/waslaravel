@@ -33,12 +33,23 @@ class User extends Authenticatable
         'timezone',
         'avatar_path',
         'last_ip',
-        'last_login'
+        'last_login',
+        'avg_food_cost'
     ];
     protected $casts = [
         'options' => 'array',
     ];
     public $timestamps = true;
+
+    public function challenges()
+    {
+        return $this->belongsToMany(Challenge::class, 'challenges_users');
+    }
+
+    public function waste()
+    {
+        return $this->hasMany(Waste::class); 
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -57,16 +68,6 @@ class User extends Authenticatable
         }else{
             return "unknown";
         }
-    }
-
-    public function challenge()
-    {
-        return $this->belongsToMany(Challenge::class, 'challenges_users');
-    }
-
-    public function waste()
-    {
-        return $this->hasMany(Waste::class); 
     }
 
     static function getTotalCost()
@@ -114,25 +115,33 @@ class User extends Authenticatable
     {
         return $query->where('id', $user);
     }
-
-    public function getWasteByMonth()
+    /**
+     * Build out stats for charts
+     * @param  [type] $start [description]
+     * @param  [type] $end   [description]
+     * @return [type]        [description]
+     */
+    public function getWasteByRange($start, $end)
     {
-
         $waste = Waste::where('user_id', $this->id)
-         ->selectRaw('DATE_FORMAT(created_at, "%m") as mo, DATE_FORMAT(created_at, "%M") as month, sum(weight) as totalMonthlyWeight, sum(cost) as totalMonthlyCost')
-         ->groupBy('mo')
-         ->orderBy('mo', 'asc')
-         //->pluck('totalMonthlyCost', 'totalMonthlyWeight', 'mo')
-         ->get();
+             ->selectRaw('DATE_FORMAT(created_at, "%Y") as year, CONCAT(DATE_FORMAT(created_at, "%m"), DATE_FORMAT(created_at, "%d"))  as mo, DATE_FORMAT(created_at, "%b-%Y") as graphkeys, sum(weight) as totalMonthlyWeight, sum(cost) as totalMonthlyCost')
+             ->range($start, $end)
+             ->groupBy('mo')
+             ->orderBy('year')
+             ->orderBy('mo')
+
+             ->orderBy('mo', 'asc')
+             //->pluck('totalMonthlyCost', 'totalMonthlyWeight', 'mo')
+             ->get();
          if (count($waste)> 0){
 
              foreach ($waste as $w) {
                 $cost[]=$w->totalMonthlyCost;
                 $weight[]=$w->totalMonthlyWeight;
-                $months[]=$w->month;
+                $keys[]=$w->graphkeys;
              }
         
-        return array("cost" => $cost, "weight" => $weight, "months" => $months );
+        return array("cost" => $cost, "weight" => $weight, "keys" => $keys );
         }
     }
 
@@ -164,5 +173,15 @@ class User extends Authenticatable
         return array('ids'=>$ids, 'weights'=>$weights);
     }
 
-    
+    public function foodCostPerDay(){
+        
+        return round($this->avg_food_cost/30, 2);
+    }
+
+    public function percentageOfWaste($days, $cost){
+        $dailyCost=$this->foodCostPerDay();
+        $averageLoss=round($days/$cost, 2);
+        //total days / (total food cost average per month/30 = total food cost per day )
+        return round($averageLoss/$dailyCost * 100, 2);
+    }
 }

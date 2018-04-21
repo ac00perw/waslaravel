@@ -16,25 +16,15 @@ export default Graph.extend({
     ready() {
 
         this.render({
-
-           labels: this.keys,
+            labels: this.keys,
             type: this.type,
             displayLegend: true,
-            // We could also do labels of
-            // ['Jeffrey', 'Taylor'], and
-            // then use one dataset object.
             datasets: [
-
                 {
                     label: 'Waste by Cost in US Dollars',
                     backgroundColor: colorArray,
                     data: this.values,
-
-
-
                 }
-
-               
             ]
         });
     }

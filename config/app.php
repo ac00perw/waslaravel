@@ -160,6 +160,8 @@ return [
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+        
+
 
 
     ],
@@ -212,6 +214,7 @@ return [
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'Helper' => App\Helpers\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        
 
     ],
 

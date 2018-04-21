@@ -5,14 +5,11 @@ export default Vue.extend({
     template: `
         <div>
             <canvas width="{{{ width }}}" height="{{{ height }}}" v-el:canvas></canvas>
-            
         </div>
     `,
-    
     data() {
         return {
             legend: '{{{legend}}}',
-            
         };
     },
 
@@ -25,6 +22,9 @@ export default Vue.extend({
                 {type: data.type, data: data, options: {legend: {display: data.displayLegend},  } } 
             );//.Bar(data);
           
+        },
+        plus: function () {
+          this.a++
         }
     }
 });

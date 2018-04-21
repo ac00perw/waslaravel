@@ -32,8 +32,6 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();     
     Route::get('avatar', 'ImageController@resizeImage');
@@ -43,26 +41,19 @@ Route::group(['middleware' => 'web'], function () {
         return view('welcome', ['QuotesController@getRandomQuote']);
     });
 
-    Route::get('/home/{user?}', 'HomeController@index');
+    Route::get('/home/{user?}/{range_start?}/{range_end?}', 'HomeController@index');
     Route::get('about', 'PagesController@about');
     Route::get('user/{user}', 'UsersController@show');
     Route::get('user/{user}/lastwaste/{total?}', 'UsersController@getLastEntries');
     Route::resource('user', 'UsersController');
-
-    //record waste as opposed to creating it
     Route::get('waste/record', 'WastesController@create');
     Route::resource('waste', 'WastesController', ['except' => ['create']]);
-
     Route::get('/challenge/{id}/stats', 'ChallengesController@stats');
     Route::get('challenges/search/', 'ChallengesController@getUserList');
     Route::get('challenges/addToChallenge/{id}', 'ChallengesController@addTeamToChallenge');
     Route::get('challenges/prepareChallenge/{user_id}', 'ChallengesController@prepareChallenge');
     Route::get('challenges/send', 'ChallengesController@sendChallenge');
     Route::resource('challenges', 'ChallengesController');
-
-
-    
-    
 });
 
 

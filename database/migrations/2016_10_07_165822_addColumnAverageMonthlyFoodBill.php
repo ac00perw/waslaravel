@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTimezoneToChallenges extends Migration
+class AddColumnAverageMonthlyFoodBill extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class AddTimezoneToChallenges extends Migration
      */
     public function up()
     {
-         Schema::table('challenges', function ($table) {
-            $table->string('timezone', 40)->default('America/New_York');
+        //
+        Schema::table('users', function ($table) {
+            $table->decimal('avg_food_cost', 6, 2);
         });
     }
 
@@ -24,8 +25,8 @@ class AddTimezoneToChallenges extends Migration
      */
     public function down()
     {
-         Schema::table('challenges', function ($table) {
-            $table->dropColumn('timezone');
+        Schema::table('users', function ($table) {
+            $table->dropColumn('avg_food_cost');
         });
     }
 }

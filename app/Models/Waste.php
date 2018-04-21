@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Models\Challenge;
+use App\Helpers;
 
 class Waste extends Model
 {
@@ -38,25 +39,49 @@ class Waste extends Model
     {
         $start_date=$challenge->start_date;
         $end_date=$challenge->end_date;
-        //print $start_date." ".$end_date;
-        
-        
-        return $query->where([ ['user_id', '=', $user_id ] ]);
+            
+        return $query->where([ ['user_id', '=', $user_id ], ['created_at', '>=', $start_date], ['created_at', '<=', $end_date] ]);
     }
 
+  /**
+   * [scopeSums description]
+   * @param  [type] $query 
+   * @return [type]        summed weight and cost
+   */
     public function scopeSums($query){
-        $query->selectRaw('sum(weight) as totalWeight, sum(cost) as totalCost');
+      $query->selectRaw('sum(weight) as totalWeight, sum(cost) as totalCost');
     }
 
-    static function wasteSum($id=null){
+    /**
+    * [scopeRange description]
+    * @param  [db] $query 
+    * @param  [type] $start range start
+    * @param  [type] $end   range end
+    * @return [type]        $query
+    */
+    public function scopeRange($query, $start, $end){
+       return $query->where('created_at', '>=', $start)
+         ->where('created_at', '<=', $end);
+    }
+
+    /**
+    * [wasteSum description]
+    * @param  [type] $id    user->id
+    * @param  [type] $start [range start]
+    * @param  [type] $end   [range end]
+    * @return [array]       various analytics
+    */
+    public static function wasteSum($id=null, $start, $end){
 
         if (!$id){
             $user=User::find( \Auth::user()->id);
         }else{
             $user=User::find($id);
         }
+
         $wastes=Waste::where('user_id', '=', $user->id)
          ->selectRaw('count(id) as totalItems, SUM(cost) as totalCost, SUM(weight) as totalWeight ')
+         ->range($start, $end)
          ->groupBy('user_id')
          ->get();
 
@@ -68,12 +93,12 @@ class Waste extends Model
             
         }
 
-        $days=Carbon::parse($user->created_at)->startOfDay()->diffInDays(Carbon::now('UTC')->endOfDay() );
+        $days=Carbon::parse($start)->startOfDay()->diffInDays(Carbon::parse($end));
         $out['days']=($days==0 ? 1 : $days  );
         return $out;
     }
 
-    static function getWasteList(){
+    public static function getWasteList(){
         $out=Array(null => "Select...");
         $wastes=WasteType::pluck('name', 'id');
         foreach($wastes as $k=>$v){
@@ -83,6 +108,11 @@ class Waste extends Model
         return $out;
     }
 
-   
+    static function getFirstWaste($user_id)
+    {
+        $waste=Waste::where('user_id', '=', $user_id)
+        ->orderBy('created_at')->first();
+        return Carbon::parse($waste->created_at);
+    }
 
 }

@@ -6,7 +6,12 @@
         <div class="col-md-12">
             <div class="panel panel-default">
             
-                <div class="panel-heading"><h4><img class="small-avatar avatar" src="{{ $user->avatar_path }}" alt="" /> {{ $user->team_name }}'s Stats</h4></div>
+                <div class="panel-heading">
+                    <div class="col-md-9">
+                        <h4><img class="small-avatar avatar" src="{{ $user->avatar_path }}" alt="" /> {{ $user->team_name }}'s Stats</h4>
+                    </div>
+                    <div class="col-md-3 header-dates">From {{ $start }} to {{ $end }}</div>
+                </div>
 
                 <div class="panel-body">
                 @if ($wasteSum['totalItems']==0)
@@ -14,11 +19,11 @@
                 @else
                     <div class="col-lg-8">
                     
-                     
+
                     <h4>Food waste in ounces</h4>
-                        <waste-graph type="line" :width="800" :height="300" :keys="{{ $months }}" :values="{{ $weight }}"></waste-graph>
+                        <waste-graph type="line" :width="800" :height="300" :keys="{{ $keys }}" :values="{{ $weight }}"></waste-graph>
                         <h4>Food cost in US dollars</h4>
-                        <cost-graph type="bar" :width="800" :height="300" :keys="{{ $months }}" :values="{{ $cost }}" ></cost-graph>
+                        <cost-graph type="bar" :width="800" :height="300" :keys="{{ $keys }}" :values="{{ $cost }}" ></cost-graph>
                     
                     </div>
                     <div class="col-lg-4">
@@ -44,6 +49,11 @@
                             <td></td>
                         </tr>
                         <tr>
+                            <td>Avg Grocery Bill</td>
+                            <td>${{ sprintf("%0.2f", $user->avg_food_cost) }}</td>
+                            <td>${{ sprintf("%0.2f", round($user->avg_food_cost/4, 2) ) }}</td>
+                        </tr>
+                        <tr>
                             <td>Items</td>
                             <td>{{ $wasteSum['totalItems'] }}</td>
                             <td>{{ round($wasteSum['totalItems']/$user->teammates, 2) }}</td>
@@ -54,9 +64,14 @@
                             <td> {{ round($wasteSum['totalWeight']/$user->teammates, 2) }} oz.</td>
                         </tr>
                         <tr>
-                            <td>Cost</td>
+                            <td>Price of Waste</td>
                             <td>${{ sprintf("%0.2f", round($wasteSum['totalCost'], 2) ) }}</td>
                             <td>${{ sprintf("%0.2f",round($wasteSum['totalCost']/$user->teammates, 2) ) }}</td>
+                        </tr>
+                        <tr>
+                        <td><span title="Total average monthly grocery bill compared to the cost of recorded food waste per day on average">Percentage of cost</span></td>
+                          <td>{{ $user->percentageOfWaste($wasteSum['days'], $wasteSum['totalCost']) }}%</td>
+                          <td>{{ round($user->percentageOfWaste($wasteSum['days'], $wasteSum['totalCost'])/$user->teammates, 2) }}%</td>
                         </tr>
                         <tr>
                             <td>Waste/day</td>
@@ -110,4 +125,11 @@
     </div>
 
 
+@endsection
+@section('bottom-scripts')
+<script>
+  $( function() {
+    $( document ).tooltip();
+  } );
+  </script>
 @endsection

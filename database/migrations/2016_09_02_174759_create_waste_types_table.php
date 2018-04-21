@@ -19,10 +19,13 @@ class CreateWasteTypesTable extends Migration
 
         $types=array(
                 'Beverage',
+                'Breakfast',
                 'Condiment',
                 'Dairy',
+                'Dinner',
                 'Fruit/Veg',
                 'Grain/Starch',
+                'Lunch',
                 'Meat',
                 'Misc',
                 'Restaurant',

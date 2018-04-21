@@ -76,7 +76,7 @@ body {
 	font-size: 125%;
 }
 
-.running1 td{
+tr.running1 td{
 	background-color: #FFF0BD;
 }
 
@@ -85,11 +85,19 @@ body {
 }
 .panel-heading{
 	font-size: 1.3em;
+	height: 70px;
 
 	h4{
 		padding: 0;
-		margin: 0;
+		margin: 0;		
 	}
+	.header-dates{
+		font-size: .85em;
+	}
+}
+.home-right{
+display: block;
+	float: right;
 }
 
 .avatar{
@@ -115,4 +123,47 @@ body {
 .e404 h1{
 	color: white;
 	font-size: 6em;
+}
+
+.user{
+	display: block;
+	min-height: 200px;
+	border-right: 1px dashed #ccc;
+}
+.user:last-child{
+	border-right: none;
+}
+/**** *****/
+.stats{ 
+
+  table{
+	  width: 95%;
+	  background-color: none;
+	  font-size: 1.2em;
+	  margin: 10px;
+
+	  td{
+	    text-transform: none;
+	    font-size: 1.2em;
+	    text-align: right;
+	    padding: 5px 10px;
+	    transition: .2s all;
+	    width: 33%;
+		}
+		td:last-child{
+			text-align: left;
+			border-left: 1px dashed #cdcdcd;
+			padding-left: 10px;
+
+		}
+		tbody tr:nth-child(odd){
+			background-color: #efefef;
+		}
+
+		tr.stat:hover td{
+			background-color: #FCF4C0;
+			font-weight: bold;
+		}
+  }
+  
 }

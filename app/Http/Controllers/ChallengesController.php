@@ -154,13 +154,16 @@ public function availableItems()
     }
 
     /**
-     * 
+     * get list of challenges from the authorized user
+     * that have yet to end
      */
-	public function index(){
-		$list = \Auth::user()->challenge;
+  	public function index(){
+  		$list = \Auth::user()->challenges()
+          ->where('end_date', '>=', Carbon\Carbon::now() )
+          ->orderBy('end_date')->get();
 
-		return view('challenge.index', compact('list') );
-	}
+  		return view('challenge.index', compact('list') );
+  	}
 
     /**
      * grab json stats based on id
@@ -172,13 +175,36 @@ public function availableItems()
         $challenge=Challenge::findOrFail($id);//->challengeRange($id);
         $users=$challenge->users;
         $waste = array();
+        $total=0;
 
         foreach($users as $u){
-             $waste[$u->id]=Waste::ChallengeRange($challenge, $u->id)->Sums()->first();
-        }
+             
+             $waste[$u->id]=array(
+                'stats'=>Waste::ChallengeRange($challenge, $u->id)
+                ->Sums()
+                ->first(),
+                'users'=>array(
+                     'id' => $u->id,
+                     'team_name' => $u->team_name,
+                     'avatar_path'=> $u->avatar_path,
+                     'teammates' => $u->teammates
+                      )
+                );
 
+       $waste['fields']['range']=array("start" => $challenge->start_date, "end" => $challenge->end_date);
+       $waste['fields']['id'][$total] = $u->id;
+       $waste['fields']['total_cost'][$total] = $waste[$u->id]['stats']['totalCost'];
+       $waste['fields']['total_weight'][$total] = $waste[$u->id]['stats']['totalWeight'];
+       $waste['fields']['teammates'][$total]=$waste[$u->id]['users']['teammates'];
+       $waste['fields']['team_name'][$total]=$waste[$u->id]['users']['team_name'];
+       $waste['fields']['avatar_path'][$total]=$waste[$u->id]['users']['avatar_path'];
+       $waste['fields']['total_weight_per_teammate'][$total]=round($waste[$u->id]['stats']['totalWeight']/$waste[$u->id]['users']['teammates'], 2);
+       $waste['fields']['total_cost_per_teammate'][$total]=round($waste[$u->id]['stats']['totalCost']/$waste[$u->id]['users']['teammates'], 2);
+       $total +=1;
+        }
+    
         //dd($users);
-        return $waste;
+        return $waste['fields'];
     }
     
      /**

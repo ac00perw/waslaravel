@@ -44,6 +44,10 @@
 	<div class="col-sm-4">
 	<div class="panel panel-default">
 		<div class="panel-heading">Details</div>
+		<div class="form-group">
+				{!! Form::label('avg_food_cost', "Average monthly food bill") !!}
+				{!! Form::text('avg_food_cost', null, ['class'=>'form-control']) !!}
+			</div>
 			<div class="form-group">
 				{!! Form::label('timezone', "Timezone") !!}
 				<select id="timezone" name="timezone">
@@ -56,6 +60,7 @@
 					@endforeach
 				</select>
 			</div>
+			
 			<div class="form-group">
 				{!! Form::label('teammates', "Number of Teammates") !!}
 				{!! Form::selectRange('teammates', 1, 100) !!}

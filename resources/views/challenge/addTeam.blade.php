@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="panel panel-default">
 	<div class="searchteams container">
 		<h1>{{ $challenge->name }}</h1>
 		<div>Starts: {{ $challenge->start_date }}</div>
@@ -19,6 +20,7 @@
 			
 		</div>
 	</div>
+</div>
 @stop
 
 @section('bottom-scripts')

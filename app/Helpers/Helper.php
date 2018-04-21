@@ -29,11 +29,18 @@ class Helper
         }
     }
 
-    public static function parseCost($amount){
+    public static function parseCost($amount)
+    {
     	return sprintf("$ %s", $amount);
     }
 
-    public static function getRandomQuote(){
+    public static function getSlug($string)
+    {
+    return str_slug($string);
+    }
+
+    public static function getRandomQuote()
+    {
         $quote = DB::table('quotes')
             ->inRandomOrder()
             ->first();

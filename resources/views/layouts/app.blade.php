@@ -40,32 +40,18 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    
+                    <li><a href="{{ url('/about') }}">About</a></li>
                     
                 @if (Auth::user() )
                     <li><a href="{{ url('/home') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>
 Dashboard</a></li>
-                     <!-- li class="dropdown">
-                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                              Your Challenges <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a href="/challenges">Show</a></li>
-                              <li><a href="#">that</a></li>
-                              <li><a href="{{ url('/challenges/create') }}">Initiate a Challenge!</a></li>
-                            </ul>
-                        </li -->
-                        <li><a href="/challenges"><i class="fa fa-user-plus" aria-hidden="true"></i>Challenges</a></li>
+                    <li><a href="/challenges"><i class="fa fa-user-plus" aria-hidden="true"></i>Challenges</a></li>
                     <li><a href="{{ url('/waste/record') }}"><i class="fa fa-trash" aria-hidden="true"></i>Record Waste</a></li>
                     <li><a href="{{ url('/waste/') }}"><i class="fa fa-info-circle" aria-hidden="true"></i>Site-wide Statistics</a></li>
 
-                  {{--  @if (Auth::user()->team_id == 1) --}}
-                       
-                   {{--  @else --}}
-                        
-                    {{-- @endif --}}
-                @else
-                    <li><a href="{{ url('/about') }}">About</a></li>
+                  
+                
+                
                 @endif
                 </ul>
 

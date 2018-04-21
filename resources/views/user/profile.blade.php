@@ -18,6 +18,7 @@
 					<li>Currency: {{ strtoupper($user->currency) }}</li>
 					<li>Weight Scale: {{ $user->weight_scale }}</li>
 					<li>Timezone: {{ $user->timezone }}</li>
+					<li>Average monthly food expenditure: {{ $user->avg_food_cost }}</li>
 					<li>Age: {{ $user->getAge() }}</li>
 					<li>Create Date: {{ $user->created_at }}</li>
 				</ul>

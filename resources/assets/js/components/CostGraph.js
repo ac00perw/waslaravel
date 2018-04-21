@@ -41,15 +41,11 @@ export default Graph.extend({
     props: ['keys', 'values', 'height', 'width', 'id', 'type'],
 
     ready() {
-
-
         this.render({
-    
+            
             labels: this.keys,
             type: this.type,
             displayLegend: false,
-            
-
             datasets: [
 
                 {
@@ -57,10 +53,8 @@ export default Graph.extend({
                     backgroundColor: colorArray,
                     data: this.values,
                     id: 'CostGraph',
-                    
-
-
-                }
+                },
+                
 
                
             ]
