@@ -21,8 +21,10 @@
                     
 
                     <h4>Food waste in ounces</h4>
+
                         <waste-graph type="line" :width="800" :height="300" :keys="{{ $keys }}" :values="{{ $weight }}"></waste-graph>
                         <h4>Food cost in US dollars</h4>
+                        {{ $keys }}
                         <cost-graph type="bar" :width="800" :height="300" :keys="{{ $keys }}" :values="{{ $cost }}" ></cost-graph>
                     
                     </div>
@@ -51,7 +53,7 @@
                         <tr>
                             <td>Avg Grocery Bill</td>
                             <td>${{ sprintf("%0.2f", $user->avg_food_cost) }}</td>
-                            <td>${{ sprintf("%0.2f", round($user->avg_food_cost/4, 2) ) }}</td>
+                            <td>${{ sprintf("%0.2f", round($user->avg_food_cost/$user->teammates, 2) ) }}</td>
                         </tr>
                         <tr>
                             <td>Items</td>

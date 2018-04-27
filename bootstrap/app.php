@@ -42,8 +42,8 @@ $app->singleton(
 );
 
 $app->register(OwenIt\Auditing\AuditingServiceProvider::class);
-$app->withFacades();
-$app->withEloquent();
+// $app->withFacades();
+// $app->withEloquent();
 /*
 |--------------------------------------------------------------------------
 | Return The Application
