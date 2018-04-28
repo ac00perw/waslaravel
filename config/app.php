@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'name' => env('APP_NAME', 'Wasted'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -147,11 +147,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
+
 
         /*
          * Application Service Providers...
          */
+        Collective\Html\HtmlServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
@@ -212,6 +214,8 @@ return [
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'Helper' => App\Helpers\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

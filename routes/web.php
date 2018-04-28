@@ -35,9 +35,9 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();     
+    Route::auth();
     Route::get('avatar', 'ImageController@resizeImage');
-    Route::post('resizeImagePost',['as'=>'resizeImagePost','uses'=>'ImageController@resizeImagePost']);
+    Route::post('resizeImagePost', ['as'=>'resizeImagePost', 'uses'=>'ImageController@resizeImagePost']);
 
     Route::get('/', function () {
         return view('welcome', ['QuotesController@getRandomQuote']);
@@ -58,10 +58,4 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('challenges/prepareChallenge/{user_id}', 'ChallengesController@prepareChallenge');
     Route::get('challenges/send', 'ChallengesController@sendChallenge');
     Route::resource('challenges', 'ChallengesController');
-
-
-    
-    
 });
-
-

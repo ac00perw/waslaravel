@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 // use Carbon\Carbon;
@@ -38,6 +39,7 @@ class User extends Authenticatable
         'options' => 'array',
     ];
     public $timestamps = true;
+    use Notifiable;
 
     /**
      * The attributes that should be hidden for arrays.

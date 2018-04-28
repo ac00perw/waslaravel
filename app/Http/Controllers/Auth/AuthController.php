@@ -69,7 +69,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-       $user=User::create([
+        $user=User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'team_name' => $data['team_name'],
@@ -77,10 +77,9 @@ class AuthController extends Controller
             'timezone' => 'America/New_York',
             'password' => bcrypt($data['password']),
         ]);
-       $data['id']=$user->id;
+        $data['id']=$user->id;
 
-        Mail::send('emails.welcome', $data, function($message) use ($data)
-        {
+        Mail::send('emails.welcome', $data, function ($message) use ($data) {
             $message->from('a@acdubs.com', "Starve Your Garbage");
             $message->subject("Welcome!");
             $message->to($data['email']);
